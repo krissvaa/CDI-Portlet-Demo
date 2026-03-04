@@ -1,0 +1,27 @@
+target/
+build/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
+!/.mvn/wrapper/maven-wrapper.jar
+
+node_modules/
+webpack.generated.js
+vite.generated.ts
+*/src/main/frontend/generated/
+*/src/main/frontend/index.html
+*/src/main/frontend/web-component.html
+*/src/main/bundles/
+drivers/
+error-screenshots/
+
+.idea/
+*.iml
+.DS_Store

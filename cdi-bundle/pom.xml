@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.vaadin</groupId>
+        <artifactId>portlet-cdi-demo</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>cdi-static-bundle</artifactId>
+    <name>CDI portlet static files bundle</name>
+    <packaging>war</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>copilot</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>vaadin-dev-server</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Jakarta Portlet API 4.0 (provided by Liferay) -->
+        <dependency>
+            <groupId>com.liferay.jakarta.portlet</groupId>
+            <artifactId>com.liferay.jakarta.portlet-api</artifactId>
+            <version>4.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-portlet</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cdi-backend</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>cdi-contact</artifactId>
+            <version>${project.version}</version>
+            <classifier>classes</classifier>
+        </dependency>
+
+        <!-- Jakarta Servlet API 6.0 (provided by Tomcat 10.1) -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>vaadin-cdi-portlet-static</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-maven-plugin</artifactId>
+                <version>${vaadin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-frontend</goal>
+                            <goal>build-frontend</goal>
+                        </goals>
+                        <configuration>
+                            <productionMode>true</productionMode>
+                            <optimizeBundle>false</optimizeBundle>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <!-- static files should contain vaadin-portlet, flow-client and all build files generated in VAADIN/ -->
+                    <packagingIncludes>WEB-INF/classes/**/*.class,WEB-INF/*.xml,WEB-INF/lib/flow-client*.jar,WEB-INF/lib/vaadin-portlet*.jar,VAADIN/,web-component.html,index.html
+                    </packagingIncludes>
+                    <webResources>
+                        <resource>
+                            <!-- this is relative to the pom.xml directory -->
+                            <directory>target/classes/META-INF/VAADIN/webapp</directory>
+                            <!-- Include all files and folders below <directory> -->
+                            <includes>
+                                <include>**</include>
+                            </includes>
+                        </resource>
+                        <resource>
+                            <directory>target/classes/META-INF</directory>
+                            <includes>
+                                <include>VAADIN/config/stats.json</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
