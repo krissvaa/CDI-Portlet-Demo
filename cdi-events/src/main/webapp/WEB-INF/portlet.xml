@@ -5,9 +5,9 @@
              version="3.0">
 
     <portlet>
-        <portlet-name>ContactCdi</portlet-name>
-        <display-name>Contact CDI Portlet</display-name>
-        <portlet-class>com.vaadin.flow.portal.cdi.contact.ContactCdiPortlet</portlet-class>
+        <portlet-name>EventsCdi</portlet-name>
+        <display-name>CDI Events Demo</display-name>
+        <portlet-class>com.vaadin.flow.portal.cdi.events.EventsPortlet</portlet-class>
         <init-param>
             <name>portlet.static.resources.mapping</name>
             <value>/o/vaadin-cdi-portlet-static/</value>
@@ -18,8 +18,8 @@
             <portlet-mode>VIEW</portlet-mode>
         </supports>
         <portlet-info>
-            <title>Contact CDI</title>
-            <short-title>CDI</short-title>
+            <title>CDI Events</title>
+            <short-title>Events</short-title>
             <keywords></keywords>
         </portlet-info>
         <security-role-ref>

@@ -1,0 +1,4 @@
+{
+  "productionMode": true,
+  "externalStatsUrl": "/o/vaadin-cdi-portlet-static/VAADIN/config/stats.json"
+}
